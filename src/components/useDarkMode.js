@@ -2,17 +2,20 @@ import React, { useEffect } from 'react';
 import useLocalStorage from './useLocalStorage'
 
 function useRangeChange(e){
-    const [value, setValue] = useLocalStorage("darkmode", false)
+    const [value, setValue] = useLocalStorage(e)
     let App = document.getElementsByClassName("App")
+    let lightvsnight = document.getElementsByClassName("dark-vs-light")
     useEffect(() =>{
-    if (e.target.value === 1 && value === false){
+    if (value === false){
       console.log("light");
-      App.classList.remove("darkmode");
-      setValue(false);
-    } else if(e.target.value === 2 && value === true) {
+      App[0].classList.remove("darkmode");
+      lightvsnight[0].textContent = "Light Mode"
+      lightvsnight[0].style.color = "black"
+    } else if(value === true) {
       console.log("dark");
-      setValue(true);
-      App.classList.add("darkmode");
+      App[0].classList.add("darkmode");
+      lightvsnight[0].textContent = "Dark Mode"
+      lightvsnight[0].style.color = "white"
     }
   },[value])
   return [value, setValue]

@@ -1,13 +1,18 @@
 import React from 'react';
 import './App.css';
 import useRangeChange from './components/useDarkMode';
+
 function App() {
-  let darkmode = false
+  const [value, setValue] = useRangeChange(false);
+  const changeDarkMode = e => {
+    e.preventDefault();
+    setValue(!value)
+  }
   return (
     <div className="App">
       <header className="App-header">
         <input
-        onChange={useRangeChange}
+        onChange={changeDarkMode}
         type="range"
         id="ranged"
         min="1"
